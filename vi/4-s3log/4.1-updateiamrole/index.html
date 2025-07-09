@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="vi" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.147.9">
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/ws-bedrock/images/favicon.png" type="image/png">
+
+    <title> :: AWS System Manager</title>
+
+    
+    <link href="/ws-bedrock/css/nucleus.css?1752059593" rel="stylesheet">
+    <link href="/ws-bedrock/css/fontawesome-all.min.css?1752059593" rel="stylesheet">
+    <link href="/ws-bedrock/css/hybrid.css?1752059593" rel="stylesheet">
+    <link href="/ws-bedrock/css/featherlight.min.css?1752059593" rel="stylesheet">
+    <link href="/ws-bedrock/css/perfect-scrollbar.min.css?1752059593" rel="stylesheet">
+    <link href="/ws-bedrock/css/auto-complete.css?1752059593" rel="stylesheet">
+    <link href="/ws-bedrock/css/atom-one-dark-reasonable.css?1752059593" rel="stylesheet">
+    <link href="/ws-bedrock/css/theme.css?1752059593" rel="stylesheet">
+    <link href="/ws-bedrock/css/hugo-theme.css?1752059593" rel="stylesheet">
+    
+    <link href="/ws-bedrock/css/theme-workshop.css?1752059593" rel="stylesheet">
+    
+    
+
+    <script src="/ws-bedrock/js/jquery-3.3.1.min.js?1752059593"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/ws-bedrock/vi/4-s3log/4.1-updateiamrole/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/ws-bedrock/js/lunr.min.js?1752059593"></script>
+<script type="text/javascript" src="/ws-bedrock/js/auto-complete.js?1752059593"></script>
+<script type="text/javascript">
+    
+
+        var baseurl = "https:\/\/phantienphu6685.github.io\/ws-bedrock\/\/vi";
+    
+</script>
+<script type="text/javascript" src="/ws-bedrock/js/search.js?1752059593"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ws-bedrock/vi/1-introduce/" title="Giới thiệu" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ws-bedrock/vi/1-introduce/">
+           <b> 1. </b> Giới thiệu
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ws-bedrock/vi/2-prerequiste/" title="Các bước chuẩn bị" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ws-bedrock/vi/2-prerequiste/">
+           <b> 2. </b> Các bước chuẩn bị
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ws-bedrock/vi/2-prerequiste/2.1-createbedrock/" title="" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ws-bedrock/vi/2-prerequiste/2.1-createbedrock/">
+          
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ws-bedrock/vi/3-accessibilitytoinstances/" title="Tạo kết nối đến máy chủ EC2" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ws-bedrock/vi/3-accessibilitytoinstances/">
+           <b> 3. </b> Tạo kết nối đến máy chủ EC2
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ws-bedrock/vi/3-accessibilitytoinstances/3.1-public-instance/" title="Kết nối đến máy chủ Public" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ws-bedrock/vi/3-accessibilitytoinstances/3.1-public-instance/">
+           <b> 3.1. </b> Kết nối đến máy chủ Public
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ws-bedrock/vi/3-accessibilitytoinstances/3.2-private-instance/" title="Tạo kết nối đến máy chủ EC2 Private" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ws-bedrock/vi/3-accessibilitytoinstances/3.2-private-instance/">
+           <b> 3.2. </b> Tạo kết nối đến máy chủ EC2 Private
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ws-bedrock/vi/4-s3log/" title="Quản lý session logs" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/ws-bedrock/vi/4-s3log/">
+           <b> 4. </b> Quản lý session logs
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ws-bedrock/vi/4-s3log/4.2-creates3bucket/" title="Tạo S3 Bucket" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ws-bedrock/vi/4-s3log/4.2-creates3bucket/">
+           <b> 4.2 </b> Tạo S3 Bucket
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ws-bedrock/vi/4-s3log/4.3-creategwes3/" title="Tạo S3 Gateway endpoint" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ws-bedrock/vi/4-s3log/4.3-creategwes3/">
+           <b> 4.3 </b> Tạo S3 Gateway endpoint
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ws-bedrock/vi/4-s3log/4.4-configsessionlogs/" title="Theo dõi session logs" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ws-bedrock/vi/4-s3log/4.4-configsessionlogs/">
+           <b> 4.4 </b> Theo dõi session logs
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ws-bedrock/vi/4-s3log/4.1-updateiamrole/" title="" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/ws-bedrock/vi/4-s3log/4.1-updateiamrole/">
+          
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ws-bedrock/vi/5-portfwd/" title="Port Forwarding" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ws-bedrock/vi/5-portfwd/">
+           <b> 5. </b> Port Forwarding
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ws-bedrock/vi/6-cleanup/" title="Dọn dẹp tài nguyên  " class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ws-bedrock/vi/6-cleanup/">
+          <b>6. </b>Dọn dẹp tài nguyên  
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj/"><i class='fab fa-facebook'></i> AWS Study Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="vi" value="https://phantienphu6685.github.io/ws-bedrock/vi/4-s3log/4.1-updateiamrole/" selected>Tiếng Việt</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7920860&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>30-01-2022</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i> <a href="https://www.linkedin.com/in/sutrinh/"  style="color:orange">Sử Trịnh  </a> <br>
+                <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng </a> <br>
+                <a href="https://www.linkedin.com/in/hiepnguyendt"  style="color:orange">Thanh Hiệp </a>
+               
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/ws-bedrock/vi/'>AWS BEDROCK</a> > <a href='/ws-bedrock/vi/4-s3log/'>Quản lý session logs</a> > 
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#-tóm-tắt">📋 Tóm tắt</a></li>
+    <li><a href="#-mục-lục">📚 Mục lục</a></li>
+    <li><a href="#-glossary---thuật-ngữ">📖 Glossary - Thuật ngữ</a></li>
+    <li><a href="#-tài-liệu-tham-khảo">🔗 Tài liệu tham khảo</a>
+      <ul>
+        <li><a href="#tài-liệu-gốc">Tài liệu gốc</a></li>
+        <li><a href="#tài-liệu-tiếng-việt">Tài liệu tiếng Việt</a></li>
+        <li><a href="#tools-và-services">Tools và Services</a></li>
+      </ul>
+    </li>
+    <li><a href="#-ghi-chú-của-người-dịch">💬 Ghi chú của người dịch</a>
+      <ul>
+        <li><a href="#challenges-trong-quá-trình-dịch">Challenges trong quá trình dịch</a></li>
+        <li><a href="#insights-gained">Insights gained</a></li>
+      </ul>
+    </li>
+    <li><a href="#-đóng-góp-và-feedback">🤝 Đóng góp và Feedback</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              
+            </h1>
+          
+
+        
+
+
+
+	<h1 id="xây-dựng-kỹ-năng-học-máy-của-bạn-từ-con-số-0">Xây dựng kỹ năng học máy của bạn từ con số 0</h1>
+<blockquote>
+<p><strong>📖 Bài viết gốc</strong>: <a href="https://aws.amazon.com/vi/blogs/training-and-certification/building-ml-skills-from-zero/">Link</a><br>
+<strong>👤 Tác giả</strong>: Jenny Dassas<br>
+<strong>📅 Ngày xuất bản</strong>: 01/02/2024<br>
+<strong>🌐 Nguồn</strong>: AWS Training and Certification Blog<br>
+<strong>👨‍💻 Người dịch</strong>: Phan Tiến Phú – FCJ Intern<br>
+<strong>📅 Ngày dịch</strong>: 08/07/2025<br>
+<strong>⏱️ Thời gian đọc</strong>: 20 phút</p></blockquote>
+<hr>
+<h2 id="-tóm-tắt">📋 Tóm tắt</h2>
+<p>Bài viết chia sẻ cách bạn có thể bắt đầu hành trình học máy học (machine learning – ML) từ con số 0, kể cả khi chưa có nền tảng lập trình hoặc khoa học dữ liệu. AWS Training and Certification giới thiệu ba lộ trình học tập được thiết kế phù hợp với từng cấp độ người học – từ người chưa có kinh nghiệm, nhà phát triển, đến chuyên gia dữ liệu. Mỗi lộ trình kết hợp giữa lý thuyết, thực hành, và tài nguyên miễn phí, đồng thời cung cấp các khóa học, tài liệu tương tác và chứng chỉ để giúp bạn phát triển kỹ năng ML theo hướng bền vững.
+Ngoài ra, bài viết còn nhấn mạnh vào tầm quan trọng của việc luyện tập với các dự án thực tế và tham gia cộng đồng để học hỏi lẫn nhau. Dù bạn là sinh viên, người chuyển ngành, hay nhà phát triển muốn mở rộng kiến thức, đây là hướng dẫn hữu ích để xây dựng kỹ năng ML một cách có định hướng và hiệu quả.</p>
+<p><strong>🎯 Đối tượng đọc</strong>: Người mới bắt đầu học máy học, sinh viên, nhà phát triển chuyển ngành</p>
+<p><strong>📊 Độ khó</strong>: Beginner
+<strong>🏷️ Tags</strong>: machine learning, học máy, kỹ năng AI, AWS Training, entry-level ML</p>
+<hr>
+<h2 id="-mục-lục">📚 Mục lục</h2>
+<ul>
+<li><a href="/ws-bedrock/vi/4-s3log/4.1-updateiamrole/#ph%e1%ba%a7n-1-gi%e1%bb%9bi-thi%e1%bb%87u">Phần 1: Giới thiệu</a></li>
+<li><a href="/ws-bedrock/vi/4-s3log/4.1-updateiamrole/#ph%e1%ba%a7n-2-ki%e1%ba%bfn-tr%c3%bac-h%e1%bb%87-th%e1%bb%91ng">Phần 2: Hành trình học tập và xây dựng kỹ năng ML</a></li>
+<li><a href="/ws-bedrock/vi/4-s3log/4.1-updateiamrole/#ph%e1%ba%a7n-3-implementation">Phần 3: Ứng dụng thực tế và mở rộng với Generative AI</a></li>
+<li><a href="/ws-bedrock/vi/4-s3log/4.1-updateiamrole/#k%e1%ba%bft-lu%e1%ba%adn">Kết luận</a></li>
+<li><a href="/ws-bedrock/vi/4-s3log/4.1-updateiamrole/#glossary---thu%e1%ba%adt-ng%e1%bb%af">Glossary - Thuật ngữ</a></li>
+<li><a href="/ws-bedrock/vi/4-s3log/4.1-updateiamrole/#t%c3%a0i-li%e1%bb%87u-tham-kh%e1%ba%a3o">Tài liệu tham khảo</a></li>
+</ul>
+<hr>
+<p><strong><a href="https://aws.amazon.com/blogs/training-and-certification/">AWS Training and Certification Blog</a></strong></p>
+<p><strong>Xây dựng kỹ năng học máy của bạn từ con số 0</strong></p>
+<p>bởi Jenny Dassas | ngày 01 tháng 2 năm 2024 | trong <a href="https://aws.amazon.com/blogs/training-and-certification/category/alexa/">Alexa</a> , <a href="https://aws.amazon.com/blogs/training-and-certification/category/artificial-intelligence/amazon-comprehend/">Amazon Comprehend</a> , <a href="https://aws.amazon.com/blogs/training-and-certification/category/artificial-intelligence/amazon-rekognition/">Amazon Rekognition</a> , <a href="https://aws.amazon.com/blogs/training-and-certification/category/artificial-intelligence/sagemaker/">Amazon SageMaker</a> , <a href="https://aws.amazon.com/blogs/training-and-certification/category/artificial-intelligence/amazon-transcribe/">Amazon Transcribe</a> , <a href="https://aws.amazon.com/blogs/training-and-certification/category/artificial-intelligence/">Artificial Intelligence</a> , <a href="https://aws.amazon.com/blogs/training-and-certification/category/aws-training-and-certification/">AWS Training and Certification</a>, <a href="https://aws.amazon.com/blogs/training-and-certification/category/post-types/best-practices/">Best Practices</a>, <a href="https://aws.amazon.com/blogs/training-and-certification/category/post-types/customer-solutions/">Customer Solutions</a>, <a href="https://aws.amazon.com/blogs/training-and-certification/category/artificial-intelligence/generative-ai/">Generative AI</a>, <a href="https://aws.amazon.com/blogs/training-and-certification/category/post-types/technical-how-to/">Technical How-to</a> | <a href="https://aws.amazon.com/blogs/training-and-certification/building-ml-skills-from-zero/">Permalink</a> |  <a href="https://aws.amazon.com/vi/blogs/training-and-certification/building-ml-skills-from-zero/">Chia sẻ</a></p>
+<p>Đối với tôi, việc điều hướng bối cảnh công nghệ mà không có nền tảng khoa học máy tính truyền thống là một hành trình đầy thử thách nhưng cũng rất bổ ích. Khoảng hai năm trước, tôi đã chuẩn bị để tham gia <a href="https://aws.amazon.com/vi/certification/certified-cloud-practitioner/">kỳ thi AWS Certified Cloud Practitioner</a> và nếu bạn hỏi tôi rằng liệu tôi có bao giờ tưởng tượng được việc làm việc với các nhà công nghệ lỗi lạc và một số công ty doanh nghiệp lớn nhất không, tôi sẽ cười vào mặt bạn.</p>
+<p>Trong blog này, tôi sẽ chia sẻ hành trình không theo truyền thống của mình đến với sự nghiệp trong lĩnh vực công nghệ và con đường này đã dẫn tôi đến khám phá thế giới phức tạp của học máy (ML). Tôi cũng sẽ chia sẻ lời khuyên và tài nguyên cho những người học muốn thực hiện bước nhảy vọt.</p>
+<p><strong>Về tôi</strong></p>
+<p><img src="/images/2.prerequisite/jenny-dasass-300x300.jpg" alt="Jenny Dassas">
+<em>Jenny Dassas</em></p>
+<p>Tôi là một cựu sinh viên kỹ thuật hóa học, thất bại, chuyển sang MBA, người đã dành phần lớn sự nghiệp của mình làm việc trong khu vực công. Khi tôi biết về <a href="https://aws.amazon.com/vi/training/restart/">AWS re/Start</a> , một chương trình chuyên sâu kéo dài 12 tuần dạy các kỹ năng điện toán đám mây, tôi nghĩ mình sẽ thử. Mặc dù không phải là hóa học, nhưng điện toán đám mây nghe có vẻ là một bước ngoặt thú vị vì tôi luôn bị hấp dẫn bởi các lĩnh vực công nghệ khác nhau. Thông qua chương trình, tôi đã có được kinh nghiệm thực tế với các dịch vụ AWS Cloud và phát triển các kỹ năng về Linux, Python, thiết kế cơ sở dữ liệu, v.v.</p>
+<p>Nhờ sự chăm chỉ của mình trong chương trình, tôi đã giành được một suất trong <a href="https://www.amazon.jobs/content/en/teams/amazon-web-services/tech-u">AWS Tech U</a> , một chương trình phát triển lực lượng lao động tăng tốc kéo dài 48 tuần bao gồm đào tạo tại chỗ và học tập dựa trên dự án. Dự án capstone của tôi đã cho phép tôi có được trải nghiệm đầu tiên về ML bằng cách tận dụng Amazon Transcribe, Amazon Comprehend và Amazon Rekognition để phân tích giọng nói và biểu cảm khuôn mặt. Công cụ nội bộ này đã cung cấp phản hồi mang tính xây dựng cho những người nói chuyện được Chứng nhận AWS. Mặc dù tại thời điểm đó, tôi chỉ có thể tham gia vào các dịch vụ ML ở lớp ứng dụng, nhưng trải nghiệm này đã khơi dậy sự quan tâm của tôi trong việc phát triển thêm các kỹ năng của mình. Sự tự tin của tôi trong việc nắm bắt các khái niệm khoa học dữ liệu nâng cao còn khiêm tốn nhưng thông qua sự quyết tâm và học tập liên tục, tôi biết mình có thể mở rộng khả năng của mình.</p>
+<p>Với vai trò là Quản lý giải pháp khách hàng tại AWS, tôi chịu trách nhiệm giúp khách hàng áp dụng các công cụ và công nghệ của chúng tôi. Đối với việc học theo dự án, tôi được giao làm việc với một công ty Lập kế hoạch nguồn lực doanh nghiệp trong dự án Alexa Smart Properties. Trong khi theo dõi cuộc gọi của khách hàng, Giám đốc quản lý sản phẩm cấp cao đã thảo luận về các chủ đề nâng cao bao gồm các điểm khó khăn với Amazon Lex, các chiến lược tối ưu hóa chi phí cho Amazon Kendra và cơ sở dữ liệu vector. Tôi hiểu biết rất ít về các công nghệ phức tạp này. Sự xuất hiện của trí tuệ nhân tạo (AI) tạo ra càng làm tăng thêm sự bất an của tôi. Tôi quyết tâm nâng cao vai trò của mình và góp phần giải quyết các vấn đề phức tạp thông qua các giải pháp dựa trên dữ liệu, giúp tôi củng cố các kỹ năng ML của mình thông qua việc học tập tại nơi làm việc.</p>
+<p><strong>Hành trình rèn luyện kỹ năng ML của tôi</strong>
+Để bắt đầu, tôi đã áp dụng phương pháp học tự định hướng, sử dụng các khóa học trực tuyến, hướng dẫn và các dự án thực hành để thu hẹp khoảng cách kiến ​​thức của mình. <a href="https://skillbuilder.aws/">AWS Skill Builder</a> có hơn 600 khóa học kỹ thuật số miễn phí trên nhiều lĩnh vực dịch vụ AWS, dành cho người mới bắt đầu đến người học nâng cao, cũng như các tài nguyên học tập thực hành chỉ dành cho đăng ký như AWS Cloud Quest hoặc AWS Jam.</p>
+<p>Bạn không cần có nền tảng kỹ thuật hoặc đã trải qua các chương trình chuyên sâu để bắt đầu tìm hiểu về máy học. Đây là một lĩnh vực có lợi cho mọi người ở nhiều vai trò để nâng cao kỹ năng. Tôi bắt đầu với một vài khóa học cơ bản ngắn về ML, mỗi khóa đều thân thiện với người mới bắt đầu.</p>
+<ul>
+<li><a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/11322/introduction-to-machine-learning-art-of-the-possible">Giới thiệu về Học máy: Nghệ thuật của khả năng</a></li>
+<li><a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/1404/machine-learning-essentials-for-business-and-technical-decision-makers">Những điều cần thiết về Machine Learning dành cho những người ra quyết định trong kinh doanh và kỹ thuật</a></li>
+<li><a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/325/exploring-the-machine-learning-toolset">Khám phá Bộ công cụ học máy</a></li>
+</ul>
+<p>Sau khi có được hiểu biết cơ bản về học máy, tôi đã sẵn sàng để đào sâu các kỹ năng của mình. Tôi đã đăng ký các khóa đào tạo AWS sau đây, trong đó hướng dẫn các khía cạnh chính của quy trình học máy và các ứng dụng thực tế:</p>
+<ul>
+<li><a href="https://www.aws.training/SessionSearch?pageNumber=1&amp;courseId=38910&amp;languageId=1">Machine Learning Pipeline trên AWS</a> cung cấp trải nghiệm thực tế với quy trình làm việc ML toàn diện trên AWS bao gồm chuẩn bị dữ liệu, đào tạo mô hình, đánh giá và triển khai.</li>
+<li><a href="https://www.aws.training/SessionSearch?pageNumber=1&amp;courseId=40748&amp;languageId=1">Khoa học dữ liệu thực tế với Amazon SageMaker</a> tập trung vào việc xây dựng, đào tạo, điều chỉnh và triển khai các mô hình ML trong SageMaker bằng cách sử dụng các tập dữ liệu thực.</li>
+<li><a href="https://www.aws.training/SessionSearch?pageNumber=1&amp;courseId=91270&amp;languageId=1">Giải pháp phân tích dữ liệu hàng loạt trên AWS</a> đã khám phá các phương pháp hay nhất để thiết kế hệ thống xử lý dữ liệu như quy trình ETL nhằm chuẩn bị dữ liệu cho máy học.</li>
+</ul>
+<p><strong>Học ML bằng cách thực hành</strong></p>
+<p>Càng tìm hiểu về máy học, thông qua các khóa học và làm việc với khách hàng về các trường hợp sử dụng thực tế trong ngành, sự tò mò của tôi càng lớn. Tôi bắt đầu suy nghĩ nghiêm túc về các vấn đề kinh doanh mà ML có thể giúp giải quyết và cách tôi có thể áp dụng các kỹ năng mới của mình để tạo ra tác động. Điều này thúc đẩy tôi bổ sung kiến ​​thức của mình bằng một số dự án nhỏ thực hành sử dụng các tập dữ liệu mẫu, chẳng hạn như xây dựng một mô hình phân loại đơn giản trong SageMaker để dự đoán tình trạng mất khách hàng. Mặc dù cơ bản, những nỗ lực ban đầu này trong việc áp dụng ML đã củng cố sự hiểu biết và sự tự tin của tôi. Học bằng cách làm và bước ra khỏi vùng an toàn đã thúc đẩy các kỹ năng của tôi và cho tôi thấy có bao nhiêu tiềm năng để chuyển đổi các tổ chức bằng ML.</p>
+<p><strong>Chuẩn bị cho AWS Certified Machine Learning- Chuyên ngành</strong></p>
+<p>Kỳ thi <a href="https://aws.amazon.com/certification/certified-machine-learning-specialty/">AWS Certified Machine Learning – Specialty</a> là một trong những chứng chỉ AWS khó nhất nhưng tôi muốn xác thực các kỹ năng mới tìm thấy của mình bằng cách vượt qua kỳ thi và đạt được chứng chỉ ngành đáng mơ ước này. Bạn có thể nhớ rằng trước đây tôi đã đạt được chứng chỉ cơ bản, AWS Certified Cloud Practitioner. Tôi khuyên mọi người nên bắt đầu với chứng chỉ này và có thể cũng đạt được Chứng chỉ AWS cấp độ Cộng sự trước khi chuyển sang các kỳ thi Chuyên ngành.</p>
+<p>AWS không yêu cầu bạn phải chuẩn bị cụ thể trước kỳ thi. Tuy nhiên, tôi khuyên bạn nên làm theo các bước sau để chuẩn bị cho ngày thi:</p>
+<ul>
+<li>Xem lại hướng dẫn thi để hiểu nội dung thi và làm Bộ câu hỏi thực hành chính thức của AWS Certification, có trong <a href="http://www.skillbuilder.aws/">AWS Skill Builder</a> , để hiểu các câu hỏi theo phong cách thi.</li>
+<li>Tìm hiểu về các chủ đề thi bằng cách đăng ký khóa đào tạo kỹ thuật số trên AWS Skill Builder.</li>
+<li>Chuẩn bị cho kỳ thi bằng cách <a href="https://aws.amazon.com/training/digital/?trk=1a188bd5-9b05-451e-b80b-3e515d98300c&amp;sc_channel=el&amp;trk=d7b1ec2a-31f1-427d-a285-98e21e051bb3&amp;sc_channel=el">đăng ký AWS Skill Builder</a> để truy cập Khóa học luyện thi tự học (có Tài liệu thực hành). Xem lại các sách trắng và Câu hỏi thường gặp liên quan đến dịch vụ AWS có trên trang thi.</li>
+<li>Xác minh sự sẵn sàng cho kỳ thi của bạn bằng cách làm Bài kiểm tra thực hành chính thức của AWS Certification có sẵn trên AWS Skill Builder khi đăng ký.</li>
+</ul>
+<p><strong>Các khóa học và tài nguyên cụ thể mà tôi đã sử dụng bao gồm:</strong></p>
+<ul>
+<li><a href="https://www.coursera.org/specializations/machine-learning-introduction">Chuyên ngành Machine Learning</a> bao gồm nhiều chủ đề toàn diện, bao gồm hồi quy tuyến tính, thuật toán học máy, mạng nơ-ron, học sâu, mô hình trình tự và các ứng dụng thực tế, cung cấp hiểu biết toàn diện về lĩnh vực này. Tôi đã trải qua điều này hai lần, làm lại tất cả các phòng thí nghiệm thực hành để củng cố kiến ​​thức ứng dụng của mình.</li>
+<li><a href="https://www.amazon.com/Hands-Machine-Learning-Scikit-Learn-TensorFlow/dp/1492032646">Hands-On Machine Learning with Scikit-Learn, Keras và TensorFlow</a> là cuốn sách của Aurélien Géron và nó đã giúp tôi hiểu rõ hơn về một số mô hình đào tạo, bao gồm máy vectơ hỗ trợ, cây quyết định, rừng ngẫu nhiên và phương pháp tổng hợp.</li>
+<li><a href="https://www.udemy.com/course/aws-machine-learning/">Khóa học AWS Certified Machine Learning Specialty</a> trang bị cho bạn kiến ​​thức chuyên sâu về ML trên AWS thông qua các bài giảng video, phòng thí nghiệm thực hành và bài kiểm tra thực hành để chuẩn bị đầy đủ cho kỳ thi chuyên ngành và cung cấp cho bạn các kỹ năng ứng dụng để xây dựng, đào tạo và triển khai các mô hình ML.</li>
+<li><a href="https://explore.skillbuilder.aws/learn/public/learning_plan/view/28/machine-learning-learning-plan?la=cta&amp;cta=topbanner">Kế hoạch học máy – AWS Skill Builder</a> cung cấp các hướng dẫn tương tác, video và phòng thí nghiệm để mang đến cho bạn trải nghiệm học máy thực tế thông qua việc phát triển mô hình, đào tạo thuật toán và triển khai các dự án trên AWS để giúp bạn thành thạo học máy trên đám mây.</li>
+<li><a href="https://www.youtube.com/playlist?list=PLhr1KZpdzukcOr_6j_zmSrvYnLUtgqsZz">Chuỗi video hướng dẫn chuyên sâu về Amazon SageMaker - AWS trên YouTube</a> cung cấp các video hướng dẫn và trình diễn chi tiết từ các chuyên gia về máy học của AWS để cung cấp cái nhìn sâu sắc về các khả năng của SageMaker và hướng dẫn bạn cách xây dựng, đào tạo, điều chỉnh, triển khai và quản lý các mô hình máy học.</li>
+<li><a href="https://docs.aws.amazon.com/sagemaker/">Amazon SageMaker Developer Guide</a> cung cấp tài liệu toàn diện, mã mẫu và hướng dẫn từng bước để hướng dẫn các nhà phát triển nắm được đầy đủ các chức năng của SageMaker cho từng bước của quy trình học máy, từ chuẩn bị dữ liệu và đào tạo mô hình đến triển khai và giám sát.</li>
+<li><a href="https://aws.amazon.com/training/learning-paths/machine-learning/exam-preparation/">AWS Machine Learning: Exam Preparation</a> cung cấp các video hướng dẫn chuyên sâu, bài kiểm tra thực hành và kiểm tra kiến ​​thức để chuẩn bị đầy đủ cho học viên tham gia kỳ thi AWS Certified Machine Learning Specialty bằng cách đề cập đến các khái niệm ML chính và các dịch vụ AWS cần thiết cho kỳ thi theo lộ trình học tập hiệu quả và có cấu trúc.</li>
+</ul>
+<p>Vào ngày thi, tôi cảm thấy lo lắng và thậm chí lo rằng mình có thể trượt vì định dạng dài và đầy thử thách. Việc chờ đợi kết quả thật căng thẳng. Nhưng ngày hôm sau, tôi phát hiện ra mình đã đỗ! Sau khi đầu tư rất nhiều thời gian và công sức tự học trong khoảng bảy tháng, việc đỗ kỳ thi đã mang lại cho tôi cảm giác tự hào và thành tựu to lớn. Thật vô cùng bổ ích khi thấy sự tận tâm của mình dẫn đến việc xây dựng thành công khối kiến ​​thức học máy mới này. Tôi có động lực để tiếp tục phát triển nền tảng ML vững chắc này.</p>
+<p><strong>Học tập AI tạo sinh</strong></p>
+<p>Trí tuệ nhân tạo tạo sinh, một lĩnh vực con của Học sâu, có khả năng tự động tạo ra nội dung mới. Không giống như các mô hình truyền thống dựa trên các mẫu và quy tắc được xác định trước, Trí tuệ nhân tạo tạo sinh có thể tự động tạo ra văn bản, hình ảnh và thậm chí là mã giống con người. Khám phá các sắc thái của các mô hình tạo sinh với khóa học kỹ thuật số miễn phí, <a href="https://www.deeplearning.ai/courses/generative-ai-with-llms/">Trí tuệ nhân tạo tạo sinh với các mô hình ngôn ngữ lớn</a> và <a href="https://www.youtube.com/playlist?list=PLhr1KZpdzukf-xb0lmiU3G89GJXaDbAIF">Nền tảng trí tuệ nhân tạo tạo sinh trên AWS</a> , đã trở thành một phần thú vị trong hành trình học tập của tôi, minh họa cách duy trì sự điều chỉnh theo các công nghệ đang phát triển làm phong phú thêm sự hiểu biết và trình độ của một người.</p>
+<p><strong>Phần kết luận</strong></p>
+<p>Khi ML tiếp tục phát triển bối cảnh CNTT, nhúng vào nhiều ngành và lĩnh vực khác nhau, nó ngày càng trở nên không thể thiếu để thúc đẩy đổi mới, nâng cao hiệu quả và mở ra những khả năng mới cho việc ra quyết định dựa trên dữ liệu. Cam kết học tập liên tục của tôi là không lay chuyển. Tôi háo hức tiếp thu kiến ​​thức và công nghệ mới để trở nên thành thạo trong các lĩnh vực tác động trực tiếp đến vai trò của mình. Kế hoạch trước mắt của tôi là khám phá các khái niệm ML tiên tiến và chuyên về AI có trách nhiệm.</p>
+<p>Hành trình của tôi trong ML, bắt đầu từ con số không, là minh chứng cho sức mạnh của việc tự học. Nếu bạn đang bắt đầu một hành trình tương tự, lời khuyên của tôi là hãy bắt đầu với tư duy phát triển, hãy nhớ rằng mọi thử thách đều là bước đệm để thúc đẩy bạn tiến về phía trước. Thế giới ML rất rộng lớn và chào đón những người có xuất thân đa dạng, vì vậy hãy bắt đầu ngay hôm nay. Chúc bạn học tập vui vẻ!</p>
+<p><em><strong>Blog bổ sung và các nguồn tài nguyên học tập về ML, AI tạo sinh và chuẩn bị chứng chỉ:</strong></em></p>
+<ul>
+<li><a href="https://aws.amazon.com/blogs/training-and-certification/steps-to-start-your-aws-certification-journey/">Các bước để bắt đầu hành trình lấy chứng chỉ AWS của bạn</a></li>
+<li><a href="https://aws.amazon.com/blogs/training-and-certification/from-zero-cloud-knowledge-to-achieving-three-aws-certifications-in-one-year/">Hành trình của người học: Từ không có kiến ​​thức về đám mây đến đạt được ba chứng chỉ AWS trong một năm</a></li>
+<li><a href="https://aws.amazon.com/blogs/training-and-certification/slay-imposter-syndrome-while-prepping-for-aws-certification-exams/">Tiêu diệt hội chứng kẻ mạo danh khi chuẩn bị cho kỳ thi Chứng nhận AWS</a></li>
+<li><a href="https://aws.amazon.com/blogs/training-and-certification/how-i-achieved-all-six-specialty-aws-certifications-on-first-attempt/">Làm thế nào tôi đạt được tất cả sáu chứng chỉ AWS chuyên ngành ngay trong lần thử đầu tiên</a></li>
+<li><a href="https://d1.awsstatic.com/training-and-certification/ramp-up_guides/Ramp-Up_Guide_Generative_AI.pdf">Hướng dẫn AWS Ramp-up: Trí tuệ nhân tạo</a></li>
+<li><a href="https://explore.skillbuilder.aws/learn/public/learning_plan/view/2207/amazon-q-generative-ai-powered-assistant-learning-plan">Amazon Q – Kế hoạch học tập của trợ lý AI tạo ra</a></li>
+</ul>
+<h2 id="-glossary---thuật-ngữ">📖 Glossary - Thuật ngữ</h2>
+<table>
+  <thead>
+      <tr>
+          <th>English</th>
+          <th>Tiếng Việt</th>
+          <th>Định nghĩa</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Machine Learning (ML)</td>
+          <td>Học máy</td>
+          <td>Nhánh của trí tuệ nhân tạo cho phép hệ thống học từ dữ liệu và cải thiện theo thời gian mà không cần lập trình rõ ràng.</td>
+      </tr>
+      <tr>
+          <td>Generative AI</td>
+          <td>AI sinh nội dung</td>
+          <td>Loại AI có khả năng tạo ra văn bản, hình ảnh hoặc mã mới bằng cách học từ dữ liệu có sẵn.</td>
+      </tr>
+      <tr>
+          <td>AWS re/Start</td>
+          <td>Chương trình AWS re/Start</td>
+          <td>Khóa đào tạo 12 tuần dành cho người mới bắt đầu học về điện toán đám mây.</td>
+      </tr>
+      <tr>
+          <td>AWS Tech U</td>
+          <td>Chương trình AWS Tech U</td>
+          <td>Chương trình đào tạo kỹ thuật 48 tuần kết hợp học qua dự án và thực hành tại chỗ.</td>
+      </tr>
+      <tr>
+          <td>Amazon SageMaker</td>
+          <td>Amazon SageMaker</td>
+          <td>Dịch vụ giúp xây dựng, huấn luyện và triển khai mô hình học máy trên AWS.</td>
+      </tr>
+      <tr>
+          <td>Amazon Rekognition</td>
+          <td>Amazon Rekognition</td>
+          <td>Dịch vụ phân tích hình ảnh và video bằng học sâu để nhận diện khuôn mặt, vật thể, văn bản,…</td>
+      </tr>
+      <tr>
+          <td>Amazon Transcribe</td>
+          <td>Amazon Transcribe</td>
+          <td>Dịch vụ chuyển giọng nói thành văn bản tự động bằng công nghệ nhận dạng tiếng nói.</td>
+      </tr>
+      <tr>
+          <td>Amazon Comprehend</td>
+          <td>Amazon Comprehend</td>
+          <td>Dịch vụ xử lý ngôn ngữ tự nhiên để trích xuất thông tin từ văn bản như chủ đề, thực thể, cảm xúc,…</td>
+      </tr>
+      <tr>
+          <td>Amazon Lex</td>
+          <td>Amazon Lex</td>
+          <td>Dịch vụ xây chatbot và giao diện hội thoại bằng văn bản và giọng nói.</td>
+      </tr>
+      <tr>
+          <td>Amazon Kendra</td>
+          <td>Amazon Kendra</td>
+          <td>Dịch vụ tìm kiếm thông minh sử dụng học máy để cung cấp kết quả tìm kiếm chính xác và theo ngữ cảnh.</td>
+      </tr>
+      <tr>
+          <td>Vector Database</td>
+          <td>Cơ sở dữ liệu vector</td>
+          <td>Loại cơ sở dữ liệu lưu trữ và tìm kiếm dữ liệu véc-tơ trong các ứng dụng AI và tìm kiếm ngữ nghĩa.</td>
+      </tr>
+      <tr>
+          <td>ETL Pipeline</td>
+          <td>Quy trình ETL</td>
+          <td>Quy trình gồm Trích xuất – Chuyển đổi – Tải dữ liệu, để chuẩn bị dữ liệu cho phân tích hoặc học máy.</td>
+      </tr>
+      <tr>
+          <td>Customer Churn</td>
+          <td>Khách hàng rời bỏ</td>
+          <td>Hiện tượng khách hàng ngừng sử dụng sản phẩm hoặc dịch vụ; có thể dự đoán bằng học máy.</td>
+      </tr>
+      <tr>
+          <td>Classification Model</td>
+          <td>Mô hình phân loại</td>
+          <td>Mô hình học máy dùng để phân chia dữ liệu thành các lớp xác định trước.</td>
+      </tr>
+      <tr>
+          <td>AWS Skill Builder</td>
+          <td>AWS Skill Builder</td>
+          <td>Nền tảng học tập của AWS với các khóa học kỹ thuật số và bài thực hành.</td>
+      </tr>
+      <tr>
+          <td>AWS Certified Cloud Practitioner</td>
+          <td>Chứng chỉ AWS Certified Cloud Practitioner</td>
+          <td>Chứng chỉ nền tảng của AWS dành cho người mới làm quen với đám mây.</td>
+      </tr>
+      <tr>
+          <td>AWS Certified Machine Learning – Specialty</td>
+          <td>Chứng chỉ AWS Certified Machine Learning – Specialty</td>
+          <td>Chứng chỉ chuyên sâu xác nhận kỹ năng xây dựng mô hình học máy trên AWS.</td>
+      </tr>
+      <tr>
+          <td>Support Vector Machines (SVM)</td>
+          <td>Máy vector hỗ trợ</td>
+          <td>Thuật toán học máy có giám sát, dùng để phân loại hoặc hồi quy.</td>
+      </tr>
+      <tr>
+          <td>Decision Trees</td>
+          <td>Cây quyết định</td>
+          <td>Mô hình phân nhánh để đưa ra quyết định dựa trên điều kiện dữ liệu.</td>
+      </tr>
+      <tr>
+          <td>Random Forests</td>
+          <td>Rừng ngẫu nhiên</td>
+          <td>Kỹ thuật học máy sử dụng nhiều cây quyết định để cải thiện độ chính xác.</td>
+      </tr>
+      <tr>
+          <td>Neural Networks</td>
+          <td>Mạng nơ-ron</td>
+          <td>Mô hình học sâu mô phỏng cấu trúc não người, dùng trong nhận diện ảnh, ngôn ngữ,…</td>
+      </tr>
+      <tr>
+          <td>Sequence Models</td>
+          <td>Mô hình chuỗi</td>
+          <td>Mô hình xử lý dữ liệu tuần tự như văn bản, chuỗi thời gian hoặc âm thanh.</td>
+      </tr>
+      <tr>
+          <td>Responsible AI</td>
+          <td>AI có trách nhiệm</td>
+          <td>Cách tiếp cận AI đảm bảo tính minh bạch, công bằng và đạo đức trong thiết kế và triển khai.</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-tài-liệu-tham-khảo">🔗 Tài liệu tham khảo</h2>
+<h3 id="tài-liệu-gốc">Tài liệu gốc</h3>
+<ul>
+<li><a href="https://aws.amazon.com/vi/blogs/training-and-certification/building-ml-skills-from-zero/">Original Article</a>: Building your machine learning skills from zero</li>
+<li><a href="link">Author&rsquo;s Profile</a>: Jenny Dassas – Cựu học viên chương trình AWS re/Start, hiện là Customer Solutions Manager tại AWS</li>
+<li><a href="https://aws.amazon.com/vi/blogs/training-and-certification/from-zero-cloud-knowledge-to-achieving-three-aws-certifications-in-one-year/">Related Articles</a>: Learner journey: From zero cloud knowledge to achieving three AWS Certifications in one year</li>
+</ul>
+<h3 id="tài-liệu-tiếng-việt">Tài liệu tiếng Việt</h3>
+<ul>
+<li><a href="https://docs.aws.amazon.com/vi_vn/index.html">AWS Documentation VN</a>: Tài liệu AWS tiếng Việt</li>
+<li><a href="https://skillbuilder.aws/">AWS Learning Resources</a>: Tài nguyên học tập AWS</li>
+<li><a href="link">Community Discussions</a>: Thảo luận cộng đồng</li>
+</ul>
+<h3 id="tools-và-services">Tools và Services</h3>
+<ul>
+<li><a href="https://aws.amazon.com/vi/sagemaker/">Amazon SageMaker</a>: Dịch vụ giúp xây dựng, huấn luyện và triển khai mô hình học máy trên AWS, hỗ trợ học máy toàn trình (end-to-end).</li>
+<li>Amazon Transcribe, Comprehend, Rekognition – Bộ công cụ ML ứng dụng:
+<ul>
+<li><a href="https://aws.amazon.com/vi/pm/transcribe/?trk=8c5db4be-d32e-451d-bebe-37d3799d4452&amp;sc_channel=ps&amp;ef_id=CjwKCAjwprjDBhBTEiwA1m1d0oY05NnLoJITV0E0zl8mg9LnpgvfIr1nYSsBh2fj11orHmxFetyAhhoCCGIQAvD_BwE:G:s&amp;s_kwcid=AL!4422!3!652937898467!e!!g!!amazon%20voice%20to%20text%20service!19909696712!151321723407&amp;gad_campaignid=19909696712&amp;gbraid=0AAAAADjHtp9S4EjFhB56lYqtf2wKGe8Y_&amp;gclid=CjwKCAjwprjDBhBTEiwA1m1d0oY05NnLoJITV0E0zl8mg9LnpgvfIr1nYSsBh2fj11orHmxFetyAhhoCCGIQAvD_BwE">Transcribe</a>: chuyển giọng nói thành văn bản</li>
+<li><a href="https://aws.amazon.com/vi/comprehend/">Comprehend</a>: xử lý và hiểu ngôn ngữ tự nhiên</li>
+<li><a href="https://aws.amazon.com/vi/rekognition/">Rekognition</a>: nhận diện khuôn mặt và phân tích hình ảnh</li>
+</ul>
+</li>
+<li><a href="https://scikit-learn.org/stable/">Scikit-learn</a> – Thư viện học máy mã nguồn mở</li>
+</ul>
+<hr>
+<h2 id="-ghi-chú-của-người-dịch">💬 Ghi chú của người dịch</h2>
+<p>Trong quá trình dịch bài viết này, tôi đặc biệt ấn tượng với hành trình học tập của tác giả từ con số 0 đến khi thi đạt chứng chỉ chuyên sâu AWS Machine Learning.</p>
+<h3 id="challenges-trong-quá-trình-dịch">Challenges trong quá trình dịch</h3>
+<ul>
+<li><strong>Technical Terms</strong>: Machine Learning Pipeline, Generative AI, Vector Database – là các thuật ngữ cần giải thích kỹ hoặc giữ nguyên. | Giải pháp: tạo bảng thuật ngữ kèm định nghĩa để giữ tính nhất quán.</li>
+<li><strong>Cultural Context</strong>: Imposter syndrome, non-traditional path, enterprise customers – các khái niệm khá &ldquo;Mỹ hóa&rdquo;, cần điều chỉnh nhẹ để phù hợp văn hóa Việt.</li>
+<li><strong>Complex Concepts</strong>: ETL pipelines, model training and tuning, sequence models | Giải pháp: đơn giản hóa ngôn ngữ giải thích mà vẫn giữ đúng ý nghĩa chuyên môn.</li>
+</ul>
+<h3 id="insights-gained">Insights gained</h3>
+<ul>
+<li><strong>Technical Learning</strong>: Hiểu được quy trình học máy từ cơ bản đến nâng cao trong hệ sinh thái AWS. Nắm được các dịch vụ AWS phục vụ ML như SageMaker, Transcribe, Comprehend,…</li>
+<li><strong>Language Skills</strong>: Luyện dịch thuật ngữ công nghệ và chuyển ngữ văn bản có tính chuyên môn cao.</li>
+<li><strong>Industry Knowledge</strong>: Thấy rõ lộ trình học và thi chứng chỉ AWS cho ngành ML. Nhận diện được nhu cầu thị trường về kỹ năng học máy và AI hiện đại.</li>
+</ul>
+<hr>
+<h2 id="-đóng-góp-và-feedback">🤝 Đóng góp và Feedback</h2>
+<p>Bài dịch này được thực hiện trong khuôn khổ <strong>FCJ Internship Program</strong>.</p>
+<p><strong>📧 Liên hệ</strong>: <a href="mailto:phantienphu.it@gmail.com">phantienphu.it@gmail.com</a><br>
+<strong>💬 Feedback</strong>: Mọi góp ý để cải thiện chất lượng dịch thuật xin gửi về email trên<br>
+<strong>🔄 Updates</strong>: Bài dịch sẽ được cập nhật dựa trên feedback từ cộng đồng</p>
+<hr>
+<p><em>© 2024 - Bản dịch thuộc về Phan Tiến Phú. Vui lòng credit khi sử dụng.</em></p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/ws-bedrock/vi/4-s3log/4.4-configsessionlogs/" title="Theo dõi session logs"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/ws-bedrock/vi/5-portfwd/" title="Port Forwarding" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/ws-bedrock/js/clipboard.min.js?1752059593"></script>
+    <script src="/ws-bedrock/js/perfect-scrollbar.min.js?1752059593"></script>
+    <script src="/ws-bedrock/js/perfect-scrollbar.jquery.min.js?1752059593"></script>
+    <script src="/ws-bedrock/js/jquery.sticky.js?1752059593"></script>
+    <script src="/ws-bedrock/js/featherlight.min.js?1752059593"></script>
+    <script src="/ws-bedrock/js/highlight.pack.js?1752059593"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/ws-bedrock/js/modernizr.custom-3.6.0.js?1752059593"></script>
+    <script src="/ws-bedrock/js/learn.js?1752059593"></script>
+    <script src="/ws-bedrock/js/hugo-learn.js?1752059593"></script>
+
+    <link href="/ws-bedrock/mermaid/mermaid.css?1752059593" rel="stylesheet" />
+    <script src="/ws-bedrock/mermaid/mermaid.js?1752059593"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

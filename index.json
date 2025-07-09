@@ -1,0 +1,127 @@
+[
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/",
+	"title": "AWS BEDROCK",
+	"tags": [],
+	"description": "",
+	"content": "BUILDING AI-ENABLED APPS WITH AWS BEDROCK Overall This hands-on activity demonstrates how to build a serverless architecture using AWS services to integrate AI functionalities. In this scenario, a client application (like Postman) sends requests to an API Gateway. The gateway triggers an AWS Lambda function, which then connects with AWS Bedrock to process AI-driven operations. IAM roles ensure the Lambda function has secure access to Bedrock. This pattern supports scalable, serverless applications that leverage generative AI services.\nKey Components: Client App (Postman or Web App): Sends HTTP requests to invoke the backend.\nAmazon API Gateway: Accepts requests and routes them to the appropriate Lambda function.\nAWS Lambda: Executes backend logic and invokes Bedrock APIs.\nAWS Bedrock: Performs AI-related tasks (e.g., text generation, summarization).\nIAM Role: Grants Lambda permission to interact securely with Bedrock. Content Introduction Preparation Connect to EC2 instance Manage session logs Port Forwarding Clean up resources "
+},
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/2-prerequiste/2.1-createbedrock/",
+	"title": "Create Bedrock ",
+	"tags": [],
+	"description": "",
+	"content": "\rTo allow our applications to send requests and receive responses from the AI ​​model on AWS Bedrock, we will grant bedrock:InvokeModel access so that Lambda can invoke the model through the Bedrock service.\nCreate Bedrock First step, go to AWS Management Console to launch Bedrock Models. Click Model access Click Enable all models In the Edit model access Check Al121 Labs (3) Check Amazon (15) Check Anthropic (12) Check Cohere (6) Check DeepSeek (1) Check Meta (2) Check Misstral AI (5) Check Stability AI (1) Then, select Next and Submit "
+},
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/1-introduce/",
+	"title": "Introduction",
+	"tags": [],
+	"description": "",
+	"content": "AWS Bedrock is a cloud-based service that streamlines the use and deployment of large language models (LLMs) from top AI providers. With a serverless foundation, it allows developers to seamlessly access powerful AI capabilities without managing infrastructure or computational resources.\nKey Highlights of AWS Bedrock:\nNo Infrastructure Hassle: Run AI models without the need to provision or maintain servers, storage, or GPUs.\nAccess to Leading LLMs: Connect directly to models from top providers like Anthropic, Cohere, Stability AI, Amazon Titan, and others.\nFlexible Customization: Fine-tune models to meet your business requirements without retraining from scratch.\nData Privacy and Security: Your data stays within your AWS environment, maintaining full control and compliance.\nSmooth Integration with AWS Services: Easily connect with services like S3, Lambda, and SageMaker for building complete AI solutions.\nPay-Only-for-Use: Benefit from a usage-based pricing model, paying only for what you consume.\nWith the above advantages, you can use Session Manager instead of using Bastion host technique to save us time and money when managing Bastion server.\n"
+},
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/3-accessibilitytoinstances/3.1-public-instance/",
+	"title": "Send a Request Using Postman",
+	"tags": [],
+	"description": "",
+	"content": " Open the Postman Test application. At the main interface. Click on New. Choose HTTP. Select POST method to send In the URL box, paste the Invoke URL obtained from API Gateway. Switch to the Body tab, select raw and JSON format Enter the following random test content: {\r\u0026#34;prompt\u0026#34;: \u0026#34;help me translate hello from english to vietnamese.\u0026#34;\r} Add \u0026ldquo;/ask\u0026rdquo; extension to call AI answering function from Bedrock\nBefore testing, you need to make sure Amazon\u0026rsquo;s access models work!\nNow everything is ready for testing.\n"
+},
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/2-prerequiste/2.2-createiamrole/",
+	"title": "Create IAM Role",
+	"tags": [],
+	"description": "",
+	"content": "\rIn this step, we will create an IAM Role. This IAM Role will be assigned the AmazonBedrockFullAccess policy, which allows Lambda to communicate with Bedrock.\nCreate IAM Role Go to IAM service administration interface In the left navigation bar, click Roles. Click Create role In the Trusted entity Type table, select AWS Service Select Lambda in the Service or use case menu Click Next In the search box, type bedrock Check the AmazonBedrockFullAccess box Click Next In the Role name box, name it ChatGPPTLambdaRole Next, click Create role Check that the Role has been created successfully "
+},
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/4-s3log/4.2-creates3bucket/",
+	"title": "Create S3 Bucket",
+	"tags": [],
+	"description": "",
+	"content": "In this step, we will create an S3 bucket to store session logs sent from EC2 instances.\nCreate S3 Bucket Access S3 service management console Click Create bucket. At the Create bucket page. In the Bucket name field, enter the bucket name lab-yourname-bucket-0001 In the Region section, select Region you are doing the current lab. The name of the S3 bucket must not be the same as all other S3 buckets in the system. You can substitute your name and enter a random number when generating the S3 bucket name.\nScroll down and click Create bucket. When we created the S3 bucket we did Block all public access so our EC2 instances won\u0026rsquo;t be able to connect to S3 via the internet. In the next step, we will configure the S3 Gateway Endpoint feature to allow EC2 instances to connect to the S3 bucket via the VPC\u0026rsquo;s internal network.\n"
+},
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/2-prerequiste/",
+	"title": "Preparation ",
+	"tags": [],
+	"description": "",
+	"content": "\rYou need to create 1 Linux instance on the public subnet and 1 Window instance on the private subnet to perform this lab.\nTo learn how to create AWS Bedrock, IAM Roles, Lambda and API Gateway, you can refer to the lab:\nAbout Bedrock About IAM Roles About Lambda About API Gateway To use AWS Bedrock effectively, we need to ensure that Lambda functions and other AWS services are granted the necessary permissions. In this preparation step, we will also create an IAM Role to enable these permissions.\nContent Prepare VPC and EC2 Create IAM Role "
+},
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/3-accessibilitytoinstances/3.2-private-instance/",
+	"title": "TEST",
+	"tags": [],
+	"description": "",
+	"content": "After pressing Send, you will see the results displayed in the Body \u0026gt; Pretty tab.\nTry sending again and see the results Test with another question Congratulations, you have completed this lab on creating and testing a serverless API using AWS Lambda, API Gateway, and Bedrock. Remember to perform resource cleanup to avoid unwanted costs.\n"
+},
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/3-accessibilitytoinstances/",
+	"title": "Connect to EC2 servers",
+	"tags": [],
+	"description": "",
+	"content": "In this step, we will connect to our EC2 servers, located in both the public and private subnets.\nContent 3.1. Connect to EC2 Public Server 3.2. Cconnect to EC2 Private Server\n"
+},
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/2-prerequiste/2.3-createlambda/",
+	"title": "Create Lambda ",
+	"tags": [],
+	"description": "",
+	"content": "\rAfter granting access to Bedrock via IAM Role, the next step is to create an AWS Lambda function to handle requests from API Gateway. Lambda will take input (prompt), send it to the AI ​​model on Bedrock, and return the result. This is an important middleware that connects the frontend (e.g. Postman or Web) with the powerful AI service on the backend of AWS.\nCreate Lambda In this step, we create a Lambda to act as a bridge between your API Gateway and AWS Bedrock. Go to Lambda management console. Click Create a function Configure information for Lambda Click Author from scratch In the function name box, name ChatGPTLambda Select language Python 3.13 Select Arm64 Select Use an existing role Choose ChatGPTLambdaRole you created Finally, check again and select Create function Once created, Click Configuration. Click Edit. Set Memory to 500 MB. Set Timeout to 2 minutes. Confirm the chatGPTLambdaRole is selected. Click Save. After saving, select code Import this code: import boto3\rimport json\r# Khởi tạo client Bedrock\rbedrock = boto3.client(\rservice_name=\u0026#39;bedrock-runtime\u0026#39;,\rregion_name=\u0026#39;us-east-1\u0026#39;\r)\rmodelId = \u0026#39;cohere.command-text-v14\u0026#39;\rdef lambda_handler(event, context):\rprint(\u0026#39;=== Incoming Event ===\u0026#39;)\rprint(json.dumps(event))\rtry:\r# Parse body từ sự kiện\rif \u0026#39;body\u0026#39; not in event:\rraise Exception(\u0026#34;Missing \u0026#39;body\u0026#39; in request.\u0026#34;)\rrequest_body = json.loads(event[\u0026#39;body\u0026#39;])\rprompt = request_body.get(\u0026#39;prompt\u0026#39;, \u0026#39;\u0026#39;).strip()\rif not prompt:\rraise Exception(\u0026#34;Prompt is empty. Please provide a valid prompt.\u0026#34;)\r# Chuẩn bị payload gửi đến Bedrock\rpayload = {\r\u0026#39;prompt\u0026#39;: prompt,\r\u0026#39;max_tokens\u0026#39;: 200,\r\u0026#39;temperature\u0026#39;: 1.0,\r\u0026#39;return_likelihoods\u0026#39;: \u0026#39;NONE\u0026#39;\r}\rprint(\u0026#34;=== Payload Sent to Bedrock ===\u0026#34;)\rprint(json.dumps(payload))\r# Gửi yêu cầu tới Bedrock\rresponse = bedrock.invoke_model(\rmodelId=modelId,\rbody=json.dumps(payload),\raccept=\u0026#39;application/json\u0026#39;,\rcontentType=\u0026#39;application/json\u0026#39;\r)\r# Đọc phản hồi từ Bedrock\rresponse_body_raw = response.get(\u0026#39;body\u0026#39;)\rif not response_body_raw:\rraise Exception(\u0026#34;No response body returned from Bedrock.\u0026#34;)\rresponse_body = json.loads(response_body_raw.read())\rprint(\u0026#34;=== Bedrock Full Response ===\u0026#34;)\rprint(json.dumps(response_body))\r# Trích xuất kết quả\rgenerations = response_body.get(\u0026#39;generations\u0026#39;, [])\rif generations and \u0026#39;text\u0026#39; in generations[0]:\rgenerated_text = generations[0][\u0026#39;text\u0026#39;]\relse:\rgenerated_text = \u0026#34;No valid output generated.\u0026#34;\rreturn {\r\u0026#39;statusCode\u0026#39;: 200,\r\u0026#39;body\u0026#39;: json.dumps({\r\u0026#39;prompt\u0026#39;: prompt,\r\u0026#39;response\u0026#39;: generated_text\r})\r}\rexcept Exception as e:\rprint(\u0026#39;=== ERROR ===\u0026#39;)\rprint(str(e))\rreturn {\r\u0026#39;statusCode\u0026#39;: 500,\r\u0026#39;body\u0026#39;: json.dumps({\r\u0026#39;error\u0026#39;: str(e)\r})\r} After coding is complete, select Deploy. If successful, you will receive a notification. "
+},
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/4-s3log/4.3-creategwes3/",
+	"title": "Create S3 Gateway endpoint",
+	"tags": [],
+	"description": "",
+	"content": " Go to VPC service management console Click Endpoints. Click Create endpoint. At the Create endpoint page. In the Name tag field, enter S3GW. In the Service Category section, click AWS services. In the search box enter S3, then select com.amazonaws.[region].s3 In the Services section, select com.amazonaws.[region].s3 with the Type of Gateway. In the VPC section, select Lab VPC. In the Route tables section, select both route tables. Scroll down, click Create endpoint. The next step is to configure Session Manager to store session logs to the S3 bucket we created.\n"
+},
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/2-prerequiste/2.4-creategateway/",
+	"title": "Create API Gateway ",
+	"tags": [],
+	"description": "",
+	"content": "\rNext, we will create an API Gateway to serve as a gateway to receive HTTP requests from users or applications (e.g. Postman). The API Gateway will forward these requests to the Lambda function we created in the previous step. This allows us to easily call the AI ​​model through a public URL, without having to manage complex server infrastructure.\nCreate API Gateway In this step, we will create an API Gateway that will act as an entry point to trigger your Lambda with HTTP requests. Go to the API Gateway management console.. bỏ link Under the REST API section, click Build. Configuration for Rest API In the API Detail menu, select New API In the API Name table, name it: chatgpt-api Then select Create API Next step A success message will appear. Click Create resource. Next step Create resource In the Resource name box, type ask Click CORS(Cross Origin Resource Sharing) Click Create resource. Next step, Create method A success message will appear.\nClick Create method. Select POST type in Method type\nIn integration type select Lambda function Enable Lambda proxy integration\nChoose us-east-1\nEnter us-east-1:youraccountid:function:chatGPTLambda.\nClick Create method In create resource, find and select POST Then, choose Deploy API In the Deploy API panel, select New stage in Stage In Stage name, give it the name you want and Click Deploy. After successful creation, we will receive Invoke URL which will help us Send HTTP request (GET/POST) from tools like Postman You need to save this URL for later use.\n"
+},
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/4-s3log/",
+	"title": "Manage session logs",
+	"tags": [],
+	"description": "",
+	"content": "With Session Manager, we can view the history of connections to instances through Session history. However, we have not seen the details of the commands used in a session.\nIn this section, we will proceed to create an S3 bucket and configure the session logs feature to see the details of the commands used in the session.\nContent: Update IAM Role Create S3 Bucket Create S3 Gateway endpoint Configure Session logs "
+},
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/4-s3log/4.4-configsessionlogs/",
+	"title": "Monitor session logs",
+	"tags": [],
+	"description": "",
+	"content": "Monitor session logs Access System Manager - Session Manager service management console Click the Preferences tab. Click Edit. Scroll down, at S3 logging, click Enable. Uncheck Allow only encrypted S3 buckets. Click Choose a bucket name from the list. Select the S3 bucket you created. Scroll down, click Save to save the configuration.\nAccess System Manager - Session Manager service management console\nClick Start session. Click Private Windows Instance. Click Start session. Type the command ipconfig. Type the command hostname. Click Terminate to exit the session, click Terminate again to confirm. Check Session logs in S3 Go to S3 service management console Click on the name of the S3 bucket we created for the lab. Click on the object name sessions log On the objects detail page, click Open. Object logs will be opened in a new tab in the browser. You can view the stored commands in session logs. "
+},
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/5-portfwd/",
+	"title": "Port Forwarding",
+	"tags": [],
+	"description": "",
+	"content": "\rPort Forwarding is a useful way to redirect network traffic from one IP address - Port to another IP address - Port. With Port Forwarding we can access an EC2 instance located in the private subnet from our workstation.\nWe will configure Port Forwarding for the RDP connection between our machine and Private Windows Instance located in the private subnet we created for this exercise.\nCreate IAM user with permission to connect SSM Go to IAM service management console Click Users , then click Add users. At the Add user page. In the User name field, enter Portfwd. Click on Access key - Programmatic access. Click Next: Permissions. Click Attach existing policies directly.\nIn the search box, enter ssm. Click on AmazonSSMFullAccess. Click Next: Tags, click Next: Reviews. Click Create user. Save Access key ID and Secret access key information to perform AWS CLI configuration.\nInstall and Configure AWS CLI and Session Manager Plugin To perform this hands-on, make sure your workstation has AWS CLI and Session Manager Plugin installed -manager-working-with-install-plugin.html)\nMore hands-on tutorials on installing and configuring the AWS CLI can be found here.\nWith Windows, when extracting the Session Manager Plugin installation folder, run the install.bat file with Administrator permission to perform the installation.\nImplement Portforwarding Run the command below in Command Prompt on your machine to configure Port Forwarding. aws ssm start-session --target (your ID windows instance) --document-name AWS-StartPortForwardingSession --parameters portNumber=\u0026#34;3389\u0026#34;,localPortNumber=\u0026#34;9999\u0026#34; --region (your region) Windows Private Instance Instance ID information can be found when you view the EC2 Windows Private Instance server details.\nExample command: C:\\Windows\\system32\u0026gt;aws ssm start-session --target i-06343d7377486760c --document-name AWS-StartPortForwardingSession --parameters portNumber=\u0026#34;3389\u0026#34;,localPortNumber=\u0026#34;9999\u0026#34; --region ap-southeast-1 If your command gives an error like below: SessionManagerPlugin is not found. Please refer to SessionManager Documentation here: http://docs.aws.amazon.com/console/systems-manager/session-manager-plugin-not-found\nProve that you have not successfully installed the Session Manager Plugin. You may need to relaunch Command Prompt after installing Session Manager Plugin.\nConnect to the Private Windows Instance you created using the Remote Desktop tool on your workstation. In the Computer section: enter localhost:9999. Return to the administration interface of the System Manager - Session Manager service. Click tab Session history. We will see session logs with Document name AWS-StartPortForwardingSession. Congratulations on completing the lab on how to use Session Manager to connect and store session logs in S3 bucket. Remember to perform resource cleanup to avoid unintended costs.\n"
+},
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/6-cleanup/",
+	"title": "Clean up resources",
+	"tags": [],
+	"description": "",
+	"content": "We will take the following steps to delete the resources we created in this exercise.\nDelete EC2 instance Go to EC2 service management console\nClick Instances. Select both Public Linux Instance and Private Windows Instance instances. Click Instance state. Click Terminate instance, then click Terminate to confirm. Go to IAM service management console\nClick Roles. In the search box, enter SSM. Click to select SSM-Role. Click Delete, then enter the role name SSM-Role and click Delete to delete the role. Click Users. Click on user Portfwd. Click Delete, then enter the user name Portfwd and click Delete to delete the user. Delete S3 bucket Access System Manager - Session Manager service management console.\nClick the Preferences tab. Click Edit. Scroll down. In the section S3 logging. Uncheck Enable to disable logging. Scroll down. Click Save. Go to S3 service management console\nClick on the S3 bucket we created for this lab. (Example: lab-fcj-bucket-0001 ) Click Empty. Enter permanently delete, then click Empty to proceed to delete the object in the bucket. Click Exit. After deleting all objects in the bucket, click Delete\nEnter the name of the S3 bucket, then click Delete bucket to proceed with deleting the S3 bucket. Delete VPC Endpoints Go to VPC service management console Click Endpoints. Select the 4 endpoints we created for the lab including SSM, SSMMESSAGES, EC2MESSAGES, S3GW. Click Actions. Click Delete VPC endpoints. In the confirm box, enter delete.\nClick Delete to proceed with deleting endpoints. Click the refresh icon, check that all endpoints have been deleted before proceeding to the next step.\nDelete VPC Go to VPC service management console\nClick Your VPCs. Click on Lab VPC. Click Actions. Click Delete VPC. In the confirm box, enter delete to confirm, click Delete to delete Lab VPC and related resources.\n"
+},
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/categories/",
+	"title": "Categories",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://phantienphu6685.github.io/ws-bedrock/tags/",
+	"title": "Tags",
+	"tags": [],
+	"description": "",
+	"content": ""
+}]
